@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="./css/style.css">
+   <link rel="stylesheet" href="./css/chatbot.css">
+  <title>Nature & Geology Wonders - Explore Pekan</title>
+  <style>
+    /* Base styles */
+    :root {
+      --primary-color: #006064;
+      --secondary-color: #00796b;
+      --accent-color: #ffa000;
+      --light-bg: #f5f5f5;
+      --dark-text: #333;
+      --light-text: #fff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --card-radius: 12px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: var(--dark-text);
+      padding-top: 80px;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      box-shadow: var(--shadow);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 50px;
+      width: auto;
+      transition: var(--transition);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+    
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--dark-text);
+      font-weight: 600;
+      font-size: 15px;
+      transition: var(--transition);
+    }
+    
+    .nav-links li a:hover {
+      color: var(--primary-color);
+    }
+    
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .login-btn {
+      background-color: var(--primary-color);
+      color: var(--light-text);
+      padding: 8px 18px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .login-btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    /* Hero section */
+    .hero {
+      height: 500px;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/api/placeholder/1200/500');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 80px;
+      position: relative;
+      margin-bottom: 40px;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      max-width: 800px;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .explore-btn {
+      background-color: var(--accent-color);
+      color: var(--dark-text);
+      padding: 12px 28px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    
+    .explore-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Main content */
+    .container {
+      max-width: 1700px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .container-btm{
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 40px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Featured attractions */
+    .featured-attractions {
+      padding: 40px 0;
+    }
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    
+    .attraction-card {
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: white;
+      transition: var(--transition);
+      height: 100%;
+    }
+    
+    .attraction-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+    
+    .card-image {
+      height: 240px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .attraction-card:hover .card-image img {
+      transform: scale(1.05);
+    }
+    
+    .location-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .location-badge i {
+      font-size: 14px;
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+    }
+    
+    .card-content p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px 20px;
+    }
+    
+    .activity-tag {
+      background-color: #e0f2f1;
+      color: var(--primary-color);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .more-link {
+      color: var(--secondary-color);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .more-link:hover {
+      color: var(--primary-color);
+    }
+
+    /* Categories section */
+    .categories-section {
+      padding: 60px 0;
+      background-color: var(--light-bg);
+    }
+    
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+    
+    .category-tab {
+      background-color: white;
+      color: var(--dark-text);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .category-tab.active {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .category-tab:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .category-tab i {
+      font-size: 18px;
+    }
+
+    /* Scrollable cards */
+    .scroll-container {
+      width: 100%;
+      overflow-x: auto;
+      padding: 10px 0 30px;
+      scrollbar-width: thin;
+      scrollbar-color: #ccc #f5f5f5;
+    }
+    
+    .scroll-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    .scroll-container::-webkit-scrollbar-track {
+      background: #f5f5f5;
+      border-radius: 10px;
+    }
+    
+    .scroll-container::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 10px;
+    }
+    
+    .scroll-cards {
+      display: flex;
+      gap: 20px;
+      padding: 10px;
+    }
+    
+    .scroll-card {
+      flex: 0 0 350px;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background-color: white;
+      transition: var(--transition);
+      position: relative;
+      text-decoration: none;
+    }
+    
+    .scroll-card:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .scroll-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .scroll-card-content {
+      padding: 20px;
+      text-decoration: none;
+
+    }
+
+
+.scroll-card-content a {
+  text-decoration: none;
+  color: inherit;
+}
+
+    
+    .scroll-card-content h4 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+      text-decoration: none;
+
+    }
+    
+    .scroll-card-content p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+      text-decoration: none;
+
+    }
+
+    /* Map section */
+    .map-section {
+      padding: 60px 0;
+    }
+    
+    .map-container {
+      height: 500px;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-top: 30px;
+    }
+    
+    /* Call to action */
+    .cta-section {
+      background-image: linear-gradient(to right, rgba(0, 96, 100, 0.9), rgba(0, 121, 107, 0.9)), url('/api/placeholder/1200/400');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+      margin-top: 60px;
+    }
+    
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .cta-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .cta-content p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .cta-btn {
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .cta-btn.primary {
+      background-color: var(--accent-color);
+      color: var(--dark-text);
+      border: none;
+    }
+    
+    .cta-btn.secondary {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Footer */
+  
+    
+    .footer-full {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 60px 80px;
+  background-color: #263238;
+  color: white;
+}
+
+.footer-column h4 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-column h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #ffa000;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: white;
+  padding-left: 5px;
+}
+
+
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .hero {
+        height: 400px;
+        padding: 0 40px;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 15px 20px;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .hero {
+        height: 350px;
+        padding: 0 20px;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .cta-content h2 {
+        font-size: 2rem;
+      }
+
+      .hero {
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 80px;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+
+<div id="navbar"></div>
+  <!-- Hero Section -->
+  <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('./images/main_photo_of_geology_page.jpg');"
+>   <div class="hero-content">
+      <h1>Explore Pekan's Natural Geological Wonders</h1>
+      <p>Explore scenic hiking trails, majestic mountain views, and hidden waterfalls that showcase Pekan’s rich natural beauty and geological heritage.</p>
+    </div>
+</section>
+ 
+
+  
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Featured Attractions -->
+    <section class="featured-attractions">
+      <h2 class="section-title">Top Natural Wonders</h2>
+      <p class="section-subtitle">Discover Pekan's most spectacular geological formations and natural attractions</p>
+      
+      <div class="card-grid">
+       <!-- Card 1 -->
+<div class="attraction-card">
+  <div class="card-image">
+    <img src="./images/bukit-panorama-hill.jpg" alt="Bukit Panorama">
+    <div class="location-badge">
+      <i class="fas fa-map-marker-alt"></i> Pekan
+    </div>
+  </div>
+  <div class="card-content">
+    <h3>Bukit Panorama</h3>
+    <p>Experience magnificent panoramic views from this hill station overlooking lush valleys and natural hot springs. Perfect for nature photography and peaceful hikes.</p>
+  </div>
+  <div class="card-footer">
+    <span class="activity-tag">
+      <i class="fas fa-hiking"></i> Hiking
+    </span>
+    <span class="activity-tag">
+      <i class="fas fa-mountain"></i> Mountain
+    </span>
+    <a href="./hikingPage.html" class="more-link">
+      View Details <i class="fas fa-chevron-right"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Card 2 -->
+<div class="attraction-card">
+  <div class="card-image">
+    <img src="./images/waterfall11.jpg" alt="Tasik Timah Tasoh">
+    <div class="location-badge">
+      <i class="fas fa-map-marker-alt"></i> Timah Tasoh
+    </div>
+  </div>
+  <div class="card-content">
+    <h3>Tasik Timah Tasoh</h3>
+    <p>A spectacular reservoir surrounded by rolling hills offering stunning sunset views and a serene environment for relaxation. Popular for boating and fishing activities.</p>
+  </div>
+  <div class="card-footer">
+    <span class="activity-tag">
+      <i class="fas fa-water"></i> Waterfall
+    </span>
+    <a href="./waterfall.html" class="more-link">
+      View Details <i class="fas fa-chevron-right"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Card 3 -->
+<div class="attraction-card">
+  <div class="card-image">
+    <img src="./images/68.png" alt="Kolam Travertin Bukit Ayer">
+    <div class="location-badge">
+      <i class="fas fa-map-marker-alt"></i> Bukit Ayer
+    </div>
+  </div>
+  <div class="card-content">
+    <h3>Kolam Travertin Bukit Ayer</h3>
+    <p>Natural hot spring pools with unique limestone formations created over thousands of years. The cascading travertine pools offer a wonderful swimming experience in mineral-rich waters.</p>
+  </div>
+  <div class="card-footer">
+    <span class="activity-tag">
+      <i class="fas fa-water"></i> Lake
+    </span>
+    <a href="./lake.html" class="more-link">
+      View Details <i class="fas fa-chevron-right"></i>
+    </a>
+  </div>
+</div>
+
+
+        <!-- Card 4 -->
+<div class="attraction-card">
+  <div class="card-image">
+    <img src="./images/3rd.jpg" alt="Tasik Biru Bukit Ibam">
+    <div class="location-badge">
+      <i class="fas fa-map-marker-alt"></i> Pekan
+    </div>
+  </div>
+  <div class="card-content">
+    <h3>Tasik Biru Bukit Ibam</h3>
+    <p>Experience magnificent panoramic views from this hill station overlooking lush valleys and natural hot springs. Perfect for nature photography and peaceful hikes.</p>
+  </div>
+  <div class="card-footer">
+    <span class="activity-tag">
+      <i class="fas fa-water"></i> Lake
+    </span>
+    <a href="./lake.html" class="more-link">
+      View Details <i class="fas fa-chevron-right"></i>
+    </a>
+  </div>
+</div>
+
+
+
+      </div>
+    </section>
+    
+    <!-- Categories Section -->
+    <section class="categories-section">
+  <h2 class="section-title">Explore By Activity</h2>
+  <p class="section-subtitle">Find natural wonders based on your preferred outdoor activities</p>
+
+  <!-- Tab Buttons -->
+  <div class="category-tabs">
+    <button class="category-tab active" data-category="hiking">Hiking Trails</button>
+    <button class="category-tab" data-category="waterfalls">Waterfalls</button>
+    <button class="category-tab" data-category="mountains">Mountain Views</button>
+    <button class="category-tab" data-category="caves">Lakes</button>
+  </div>
+
+  <!-- Scroll Cards -->
+  <div class="scroll-container">
+    <div class="scroll-cards">
+      <!-- Hiking -->
+       
+       
+      <a href="./hikingPage.html" class="scroll-card" data-category="hiking">
+        <img src="./images/hiking_image.jpg" alt="Sesar Bukit Chabang">
+        <div class="scroll-card-content">
+          <h4>Bukit panorama</h4>
+          <p>Visible fault lines and scenic trail.</p>
+        </div>
+      </a>
+      
+
+      <a href="./hikingPage.html" class="scroll-card" data-category="hiking">
+        <img src="./images/hiking2.webp" alt="Sesar Bukit Chabang">
+        <div class="scroll-card-content">
+          <h4>Mount Kinabalu</h4>
+          <p>Visible fault lines and scenic trail.</p>
+        </div>
+      </a>
+
+      <a href="./hikingPage.html" class="scroll-card" data-category="hiking">
+        <img src="./images/hiking3.jpg" alt="Wang Burma Trail">
+        <div class="scroll-card-content">
+          <h4>Bukit Tanglir</h4>
+          <p>Visible fault lines and scenic trail.</p>
+        </div>
+      </a>
+
+      <a href="./hikingPage.html" class="scroll-card" data-category="hiking">
+        <img src="./images/hiking_image.jpg" alt="Sesar Bukit Chabang">
+        <div class="scroll-card-content">
+          <h4>Sesar Bukit Chabang</h4>
+          <p>Visible fault lines and scenic trail.</p>
+        </div>
+      </a>
+
+      <a href="./hikingPage.html" class="scroll-card" data-category="hiking">
+        <img src="images/hiking2.webp" alt="Wang Burma Trail">
+        <div class="scroll-card-content">
+          <h4>Sesar Bukit Chabang</h4>
+          <p>Visible fault lines and scenic trail.</p>
+        </div>
+      </a>
+
+      <!-- Waterfalls -->
+      <a href="./waterfall.html" class="scroll-card" data-category="waterfalls" style="display: none;">
+        <img src="./images/waterfall11.jpg" alt="Lata Kinjang">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+      
+      <a href="./waterfall.html" class="scroll-card" data-category="waterfalls" style="display: none;">
+        <img src="./images/waterfall222.jpg" alt="Lata Kinjang">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+      
+
+      <a href="./waterfall.html" class="scroll-card" data-category="waterfalls" style="display: none;">
+        <img src="./images/waterfall33.jpg" alt="Lata Kinjang">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./waterfall.html" class="scroll-card" data-category="waterfalls" style="display: none;">
+        <img src="./images/waterfall11.jpg" alt="Lata Kinjang">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./waterfall.html" class="scroll-card" data-category="waterfalls" style="display: none;">
+        <img src="./images/waterfall222.jpg" alt="Lata Kinjang">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <!-- Mountains -->
+      <a href="mountain.html" class="scroll-card" data-category="mountains" style="display: none;">
+        <img src="./images/bukit-panorama-hill.jpg" alt="Gunung Tahan">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./mountain.html" class="scroll-card" data-category="mountains" style="display: none;">
+        <img src="images/mountain11.jpg" alt="Gunung Tahan">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./mountain.html" class="scroll-card" data-category="mountains" style="display: none;">
+        <img src="./images/mountain22.jpg" alt="Gunung Tahan">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./mountain.html" class="scroll-card" data-category="mountains" style="display: none;">
+        <img src="./images/bukit-panorama-hill.jpg" alt="Gunung Tahan">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./mountain.html" class="scroll-card" data-category="mountains" style="display: none;">
+        <img src="./images/mountain11.jpg" alt="Gunung Tahan">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <!-- Lakes -->
+      <a href="./lake.html" class="scroll-card" data-category="caves" style="display: none;">
+        <img src="./images/3rd.jpg" alt="Gua Kelam">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./lake.html" class="scroll-card" data-category="caves" style="display: none;">
+        <img src="./images/lake11.jpg" alt="Gua Kelam">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./lake.html" class="scroll-card" data-category="caves" style="display: none;">
+        <img src="./images/lake22.jpg" alt="Gua Kelam">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./lake.html" class="scroll-card" data-category="caves" style="display: none;">
+        <img src="./images/lake.jpg" alt="Gua Kelam">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+      <a href="./lake.html" class="scroll-card" data-category="caves" style="display: none;">
+        <img src="images/3rd.jpg" alt="Gua Kelam">
+        <div class="scroll-card-content">
+          <h4>Lata Kinjang</h4>
+          <p>Tallest cascading waterfall in Malaysia.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-full">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>About Pekan</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our History</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="#">Attractions</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Dining</a></li>
+            <li><a href="#">Shopping</a></li>
+          </ul>
+        </div>
+  
+        
+        <div class="footer-column">
+          <h4>Connect With Us</h4>
+          <ul>
+            <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll(".category-tab");
+    const cards = document.querySelectorAll(".scroll-card");
+  
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        // Activate the clicked tab
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+  
+        const selectedCategory = tab.getAttribute("data-category");
+  
+        // Filter cards by category
+        cards.forEach(card => {
+          if (card.getAttribute("data-category") === selectedCategory) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+  </script>
+  
+<script>
+  // Load navbar
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
+ 
+<!-- Placeholder -->
+<div id="chatbot-placeholder"></div>
+
+<!-- Load chatbot HTML + JS -->
+<script>
+  fetch('chatbot.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('chatbot-placeholder').innerHTML = html;
+
+      const script = document.createElement('script');
+      script.src = './js/chatbot.js';
+      script.onload = function () {
+        if (typeof initializeChatbot === 'function') {
+          initializeChatbot(); 
+        }
+      };
+      document.body.appendChild(script);
+    })
+    .catch(err => console.error('Chatbot failed to load:', err));
+</script>
+</body>
+</html>

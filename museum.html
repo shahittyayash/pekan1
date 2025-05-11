@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pahang State Museum</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/chatbot.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Roboto', sans-serif;
+      background-color: #fdfdfd;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+    }
+
+    .main-img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .description {
+      margin: 10px 0 40px;
+      font-size: 1.1rem;
+      color: #444;
+      text-align: left;
+    }
+
+    .tit {
+      text-align: left;
+    }
+
+    .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .gallery img {
+      width: 30%;
+      padding-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .gallery img {
+        width: 100%;
+      }
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #005f56;
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      text-decoration: none;
+      border-radius: 6px;
+      text-align: left;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #00796b;
+    }
+  </style>
+</head>
+<body>
+      <!-- Top Navigation -->
+  <div id="navbar"></div>
+  <div class="container">
+
+    <img src="./images/musuem1.jpg" alt="Pahang State Museum" class="main-img" />
+
+    <div class="gallery">
+      <img src="/images/musuem2.jpg" alt="Exhibit 1" />
+      <img src="/images/musuem3.jpg" alt="Exhibit 2" />
+      <img src="/images/musuem4.jpg" alt="Exhibit 3" />
+    </div>
+
+    <h1 class="tit">Pahang State Museum</h1>
+    <p class="description">
+      Located in Pekan Town, the Pahang State Museum is a contemporary art gallery that showcases a wide range of artworks from both local and national Malaysian artists. This elegant white colonial-style building also hosts cultural exhibits, making it a hub for historical and creative expression in the state of Pahang.
+    </p>
+
+
+  <script>
+  // Load navbar
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-full">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>About Pekan</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our History</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="#">Attractions</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Dining</a></li>
+            <li><a href="#">Shopping</a></li>
+          </ul>
+        </div>
+  
+        
+        <div class="footer-column">
+          <h4>Connect With Us</h4>
+          <ul>
+            <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<!-- Placeholder -->
+<div id="chatbot-placeholder"></div>
+ 
+<!-- Load chatbot HTML + JS -->
+<script>
+  fetch('chatbot.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('chatbot-placeholder').innerHTML = html;
+
+      const script = document.createElement('script');
+      script.src = './js/chatbot.js';
+      script.onload = function () {
+        if (typeof initializeChatbot === 'function') {
+          initializeChatbot(); // ✅ This makes everything work
+        }
+      };
+      document.body.appendChild(script);
+    })
+    .catch(err => console.error('Chatbot failed to load:', err));
+</script>
+
+</body>
+</html>

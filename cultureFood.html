@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pekan Cultural Heritage Tourism</title>
+   <link rel="stylesheet" href="./css/style.css">
+   <link rel="stylesheet" href="./css/chatbot.css">
+  <style>
+    /* Base styles */
+    :root {
+      --primary-color: #8B4513;
+      --secondary-color: #A0522D;
+      --accent-color: #CD853F;
+      --light-bg: #F5F5DC;
+      --dark-text: #333;
+      --light-text: #fff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.1);
+      --card-radius: 8px;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #fff;
+      color: var(--dark-text);
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      box-shadow: var(--shadow);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 50px;
+      width: auto;
+      transition: var(--transition);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+    
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--dark-text);
+      font-weight: 500;
+      font-size: 15px;
+      transition: var(--transition);
+      position: relative;
+    }
+    
+    .nav-links li a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      bottom: -5px;
+      left: 0;
+      transition: var(--transition);
+    }
+    
+    .nav-links li a:hover:after {
+      width: 100%;
+    }
+    
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .login-btn {
+      background-color: var(--primary-color);
+      color: var(--light-text);
+      padding: 8px 18px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .login-btn:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Hero section */
+    .hero {
+      height: 80vh;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 80px;
+      margin-top: 80px;
+      position: relative;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.2));
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      color: white;
+    }
+    
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 30px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      line-height: 1.6;
+    }
+
+    /* Main sections */
+    .section {
+      padding: 80px 0;
+    }
+    
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .section-header {
+      margin-bottom: 50px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--dark-text);
+      margin-bottom: 10px;
+    }
+    
+    .view-all {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .view-all:hover {
+      color: var(--secondary-color);
+    }
+
+    /* Card grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    
+    .location-card {
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: white;
+      transition: var(--transition);
+      height: 100%;
+      position: relative;
+    }
+    
+    .location-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+    
+    .card-image {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .location-card:hover .card-image img {
+      transform: scale(1.05);
+    }
+    
+    .card-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: rgba(255,255,255,0.9);
+      color: var(--dark-text);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card-content h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .card-meta {
+      display: flex;
+      gap: 15px;
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    
+    .card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Carousel */
+    .carousel-container {
+      position: relative;
+    }
+    
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding: 10px 0 30px;
+      gap: 25px;
+    }
+    
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .carousel-card {
+      flex: 0 0 300px;
+      position: relative;
+    }
+    
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+    }
+    
+    .slide-btn.prev {
+      left: -20px;
+    }
+    
+    .slide-btn.next {
+      right: -20px;
+    }
+
+    /* Featured Experience */
+    .featured-experience {
+      background-color: var(--light-bg);
+      padding: 80px 0;
+      margin: 80px 0;
+    }
+    
+    .experience-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    
+    .experience-image {
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
+    
+    .experience-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .experience-text h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    
+    .experience-text p {
+      margin-bottom: 25px;
+      line-height: 1.7;
+      color: #555;
+    }
+    
+    .experience-btn {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: var(--transition);
+    }
+    
+    .experience-btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #263238;
+      color: white;
+      padding: 60px 0 30px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-column h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--accent-color);
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-column ul li a {
+      color: #ccc;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    
+    .footer-column ul li a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 30px;
+      text-align: center;
+      font-size: 14px;
+      color: #999;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero {
+        height: 60vh;
+        padding: 0 40px;
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      .experience-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 15px 20px;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .hero {
+        height: 50vh;
+        padding: 0 20px;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+  
+<div id="navbar"></div>
+  <!-- Hero Section -->
+  <section class="hero" style="background-image: url('./images/Pekan_13.jpg');">
+    <div class="hero-content">
+      <h1>Explore Pekan's Heritage & Culture</h1>
+      <p>Discover historical places, cultural treasures, and authentic culinary experiences in the royal town of Pekan, Malaysia.</p>
+    </div>
+  </section>
+
+  <!-- Heritage Places Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Heritage Places</h2>
+        <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="card-grid">
+    
+        <!-- Carousel Card 1 -->
+<a href="./museum.html" style="text-decoration: none; color: inherit;">
+  <div class="location-card carousel-card">
+    <div class="card-image">
+      <img src="./images/dsc-1232-01-largejpg.jpg" alt="Sultan Abdullah Gallery">
+      <div class="card-badge">
+        <i class="fas fa-paint-brush"></i> Art Gallery
+      </div>
+    </div>
+    <div class="card-content">
+      <h3>Pahang State Museum</h3>
+      <div class="card-meta">
+        <span><i class="fas fa-map-marker-alt"></i> Pekan Town</span>
+      </div>
+      <p>Contemporary art gallery showcasing local and national Malaysian artists.</p>
+    </div>
+  </div>
+</a>
+
+<!-- Carousel Card 2 -->
+<a href="./museum.html" style="text-decoration: none; color: inherit;">
+  <div class="location-card carousel-card">
+    <div class="card-image">
+      <img src="./images/muzium-sultan-abu-bakar.jpg" alt="Pahang Cultural Museum">
+      <div class="card-badge">
+        <i class="fas fa-history"></i> Cultural Heritage
+      </div>
+    </div>
+    <div class="card-content">
+      <h3>Pahang Cultural Museum</h3>
+      <div class="card-meta">
+        <span><i class="fas fa-map-marker-alt"></i> Pekan Town Center</span>
+      </div>
+      <p>Exhibits on Pahang's cultural diversity and historical development.</p>
+    </div>
+  </div>
+</a>
+
+<!-- Carousel Card 3 -->
+<a href="./museum.html" style="text-decoration: none; color: inherit;">
+  <div class="location-card carousel-card">
+    <div class="card-image">
+      <img src="./images/in-front-of-museum.jpg" alt="Sultan Abu Bakar Royal Gallery">
+      <div class="card-badge">
+        <i class="fas fa-crown"></i> Royal Heritage
+      </div>
+    </div>
+    <div class="card-content">
+      <h3>Sultan Abu Bakar Royal Gallery</h3>
+      <div class="card-meta">
+        <span><i class="fas fa-map-marker-alt"></i> Palace Complex</span>
+      </div>
+      <p>Royal regalia and historical artifacts from Pahang's royal family.</p>
+    </div>
+  </div>
+</a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Experience -->
+  <section class="featured-experience">
+    <div class="container">
+      <div class="experience-content">
+        <div class="experience-image">
+          <img src="./images/Royal-Pahang-Cuisine-min-1600x900.webp" alt="Traditional Pekan Food">
+        </div>
+        <div class="experience-text">
+          <h2>Taste the Authentic Pekan Cuisine</h2>
+          <p>Pekan's culinary heritage reflects its royal history and riverside location. Sample dishes once prepared for sultans and taste the fresh catch from Pahang River prepared in traditional styles handed down through generations.</p>
+          <p>Don't miss signature dishes like Nasi Kebuli, Ikan Patin Masak Tempoyak, and Opor Daging Salai that showcase the diverse culinary traditions of this royal town.</p>
+          <a href="#" class="experience-btn">Discover Local Cuisine</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Food Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Local Culinary Heritage</h2>
+        <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      
+      <div class="card-grid">
+        <!-- Card 1 -->
+        <a href="./food.html" style="text-decoration: none; color: inherit;">
+          <div class="location-card">
+            <div class="card-image">
+              <img src="./images/resepi-ikan-patin-masak-tempoyak.jpg" alt="Ikan Patin Tempoyak">
+              <div class="card-badge">
+                <i class="fas fa-utensils"></i> Signature Dish
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Ikan Patin Tempoyak</h3>
+              <div class="card-meta">
+                <span><i class="fas fa-map-marker-alt"></i> Riverfront Restaurants</span>
+              </div>
+              <p>Silver catfish cooked in fermented durian sauce - a royal delicacy and signature dish of Pekan.</p>
+            </div>
+          </div>
+        </a>
+        
+        
+        <!-- Card 2 -->
+        <a href="./food.html" style="text-decoration: none; color: inherit;">
+          <div class="location-card">
+            <div class="card-image">
+            <img src="./images/nasi-kebuli-400x375.jpg" alt="Nasi Kebuli">
+            <div class="card-badge">
+              <i class="fas fa-utensils"></i> Signature Dish
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Ikan Patin Tempoyak</h3>
+            <div class="card-meta">
+              <span><i class="fas fa-map-marker-alt"></i> Riverfront Restaurants</span>
+            </div>
+            <p>Silver catfish cooked in fermented durian sauce - a royal delicacy and signature dish of Pekan.</p>
+          </div>
+        </div>
+      </a>
+        
+        <!-- Card 3 -->
+        <a href="./food.html" style="text-decoration: none; color: inherit;">
+          <div class="location-card">
+            <div class="card-image">
+            <img src="./images/aIMG_3229.jpg" alt="Opor Daging Salai">
+            <div class="card-badge">
+              <i class="fas fa-utensils"></i> Signature Dish
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Ikan Patin Tempoyak</h3>
+            <div class="card-meta">
+              <span><i class="fas fa-map-marker-alt"></i> Riverfront Restaurants</span>
+            </div>
+            <p>Silver catfish cooked in fermented durian sauce - a royal delicacy and signature dish of Pekan.</p>
+          </div>
+        </div>
+      </a>
+        
+        <!-- Card 4 -->
+        <a href="./food.html" style="text-decoration: none; color: inherit;">
+          <div class="location-card">
+            <div class="card-image">
+            <img src="./images/23310.jpg" alt="Puding Diraja">
+            <div class="card-badge">
+              <i class="fas fa-utensils"></i> Signature Dish
+            </div>
+          </div>
+          <div class="card-content">
+            <h3>Ikan Patin Tempoyak</h3>
+            <div class="card-meta">
+              <span><i class="fas fa-map-marker-alt"></i> Riverfront Restaurants</span>
+            </div>
+            <p>Silver catfish cooked in fermented durian sauce - a royal delicacy and signature dish of Pekan.</p>
+          </div>
+        </div>
+      </a>
+      </div>
+    </div>
+  </section>
+
+   
+  <!-- Footer -->
+  <footer>
+    <div class="footer-full">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>About Pekan</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our History</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="#">Attractions</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Dining</a></li>
+            <li><a href="#">Shopping</a></li>
+          </ul>
+        </div>
+  
+        
+        <div class="footer-column">
+          <h4>Connect With Us</h4>
+          <ul>
+            <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Carousel functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const carousel = document.querySelector('.carousel');
+      const prevBtn = document.querySelector('.slide-btn.prev');
+      const nextBtn = document.querySelector('.slide-btn.next');
+      const cardWidth = 325; // card width + gap
+      
+      prevBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+<script>
+  // Load navbar
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
+ 
+<!-- Placeholder -->
+<div id="chatbot-placeholder"></div>
+
+<!-- Load chatbot HTML + JS -->
+<script>
+  fetch('chatbot.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('chatbot-placeholder').innerHTML = html;
+
+      const script = document.createElement('script');
+      script.src = './js/chatbot.js';
+      script.onload = function () {
+        if (typeof initializeChatbot === 'function') {
+          initializeChatbot(); 
+        }
+      };
+      document.body.appendChild(script);
+    })
+    .catch(err => console.error('Chatbot failed to load:', err));
+</script>
+</body>
+</html>

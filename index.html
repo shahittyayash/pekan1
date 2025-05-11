@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Explore Pekan – Smart Tourism</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="stylesheet" href="./css/chatbot.css">
+
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <div id="navbar"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <div class="hero-images">
+      <div class="hero-image active" style="background-image: url('images/hero2.jpg')"></div>
+      <div class="hero-image" style="background-image: url('images/hero3.jpg')"></div>
+      <div class="hero-image" style="background-image: url('images/hero4.jpg')"></div>
+    </div>
+ <div class="banner-text" id="hero-text">
+ 
+</div>
+
+    <button class="arrow left" onclick="prevSlide()">&#10094;</button>
+    <button class="arrow right" onclick="nextSlide()">&#10095;</button>
+  </section>
+  <!--cards-->
+
+  <section class="events-section">
+  <h2>What's Happening This Month</h2>
+  <div class="events-container">
+
+    <!-- Event 1 -->
+    <div class="event-card" onclick="openPopup('flick')">
+      <div class="event-date-single">
+        <span>15</span>
+        <small>MAY 2025</small>
+      </div>
+      <img src="./images/pekan-hero.jpg" alt="Flick">
+      <div class="event-info">
+        <p><strong>🔍 PEKAN | ENTERTAINMENT</strong></p>
+        <h3>Flick</h3>
+        <button>See More</button>
+      </div>
+    </div>
+
+    <!-- Event 2 -->
+    <div class="event-card" onclick="openPopup('photo')">
+      <div class="event-date-single">
+        <span>22</span>
+        <small>MAY 2025</small>
+      </div>
+      <img src="./images/16.jpg" alt="Photography">
+      <div class="event-info">
+        <p><strong>📷 PEKAN | EXHIBITION</strong></p>
+        <h3>Photography Showcase</h3>
+        <button>See More</button>
+      </div>
+    </div>
+
+    <!-- Event 3 -->
+    <div class="event-card" onclick="openPopup('culture')">
+      <div class="event-date-single">
+        <span>28</span>
+        <small>MAY 2025</small>
+      </div>
+      <img src="./images/15.jpg" alt="Cultural Night">
+      <div class="event-info">
+        <p><strong>🌟 PEKAN | CULTURE</strong></p>
+        <h3>Gala Night</h3>
+        <button>See More</button>
+      </div>
+    </div>
+<!--Event 4-->
+    <div class="event-card" onclick="openPopup('culture2')">
+      <div class="event-date-single">
+        <span>30</span>
+        <small>MAY 2025</small>
+      </div>
+      <img src="./images/11.jpg" alt="Cultural Night">
+      <div class="event-info">
+        <p><strong>📷 PEKAN | ENTERTAINMENT</strong></p>
+        <h3>Cultural Night</h3>
+        <button>See More</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Single Popup (used for all events) -->
+<div id="event-popup" class="popup hidden" onclick="closePopup(event)">
+  <div class="popup-content">
+    <span class="close-btn" onclick="closePopup()">×</span>
+    <h3 id="popup-title">Event Title</h3>
+    <p id="popup-desc">Event description will appear here.</p>
+    <div class="popup-images" id="popup-images">
+      <!-- Images dynamically inserted -->
+    </div>
+  </div>
+</div>
+
+<section class="things-to-do">
+  <div class="header-row">
+    <h2>Things To Do</h2>
+  </div>
+
+  <div class="category-icons">
+    <button onclick="selectCategory('all')" class="active">All</button>
+    <button onclick="selectCategory('nature')">Nature</button>
+    <button onclick="selectCategory('culture')">Culture & History</button>
+    <button onclick="selectCategory('food')">Food & Beverages</button>
+  </div>
+
+  <div class="carousel-wrapper">
+    <button class="carousel-arrow left" onclick="scrollThings(-1)">&#10094;</button>
+
+    <div class="carousel-container" id="things-carousel">
+      <a href="./waterfall.html" class="carousel-item nature">
+        <img src="./images/20.jpg" alt="Nature">
+        <h3>Lata Kinjang</h3>
+        <p>📍 PEKAN | NATURE</p>
+      </a>
+
+      <a href="./museum.html" class="carousel-item culture">
+        <img src="./images/musuem1.jpg" alt="Culture">
+        <h3>Pahang State Museum</h3>
+        <p>📍 PEKAN | CULTURE</p>
+      </a>
+
+      <a href="./food.html" class="carousel-item food">
+        <img src="./images/food1.jpg" alt="Food">
+        <h3>Pekan Local Market</h3>
+        <p>📍 PEKAN | FOOD</p>
+      </a>
+
+    </div>
+
+    <button class="carousel-arrow right" onclick="scrollThings(1)">&#10095;</button>
+  </div>
+</section>
+
+  <section class="map-section">
+    <h2>Recommendation</h2>
+    <div class="map-layout">
+      
+      <div class="place-list">
+        <div class="place-item" onclick="focusPlace(0)">
+          <img src="./images/18.jpg">
+          <div>
+            <h4>Museum Sultan Abu Bakar</h4>
+            <p>📍 Culture & History</p>
+          </div>
+        </div>
+        <div class="place-item" onclick="focusPlace(1)">
+          <img src="./images/pekan-hero.jpg" alt="Place 2">
+          <div>
+            <h4>Pahang River Cruise</h4>
+            <p>📍 Nature</p>
+          </div>
+        </div>
+        <div class="place-item" onclick="focusPlace(2)">
+          <img src="./images/28.jpg" alt="Place 3">
+          <div>
+            <h4>Pekan Food Street</h4>
+            <p>📍 Food & Beverages</p>
+          </div>
+        </div>
+      </div>
+  
+      <div id="map"></div>
+    </div>
+  </section>
+   
+  <!-- Footer -->
+  <footer>
+    <div class="footer-full">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>About Pekan</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our History</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="#">Attractions</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Dining</a></li>
+            <li><a href="#">Shopping</a></li>
+          </ul>
+        </div>
+  
+        
+        <div class="footer-column">
+          <h4>Connect With Us</h4>
+          <ul>
+            <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script src="./js/dashboard.js"></script>
+  <!-- chatbot placeholder -->
+<!-- Placeholder -->
+<div id="chatbot-placeholder"></div>
+
+<!-- Load chatbot HTML + JS -->
+<script>
+  fetch('chatbot.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('chatbot-placeholder').innerHTML = html;
+
+      const script = document.createElement('script');
+      script.src = './js/chatbot.js';
+      script.onload = function () {
+        if (typeof initializeChatbot === 'function') {
+          initializeChatbot(); // ✅ This makes everything work
+        }
+      };
+      document.body.appendChild(script);
+    })
+    .catch(err => console.error('Chatbot failed to load:', err));
+</script>
+
+  <script>
+  // Load navbar
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
+</body>
+</html>

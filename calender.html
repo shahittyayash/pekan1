@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Calendar – Explore Pekan</title>
+  <link rel="stylesheet" href="./css/chatbot.css">
+  <link rel="stylesheet" href="./css/calender.css">
+  <link rel="stylesheet" href="./css/style.css">
+
+  
+</head>
+<body>
+
+<!-- Top Navbar -->
+<div id="navbar"></div>
+<!-- chat-->
+<!-- Calendar Section -->
+<div class="calendar-container">
+  <div class="calendar-header">
+    <h1>May, 2025</h1>
+    <div class="nav-buttons">
+      <button disabled>&lt;</button>
+      <button disabled>&gt;</button>
+    </div>
+  </div>
+
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th>MON</th>
+        <th>TUE</th>
+        <th>WED</th>
+        <th>THU</th>
+        <th>FRI</th>
+        <th>SAT</th>
+        <th>SUN</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Week 1 -->
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>1</td>
+  <td class="event-day eid" 
+    data-title="Eid Festival" 
+    data-description="Join the Eid celebration at Pekan Mosque with traditional food, performances, and prayer."
+    data-location="Pekan Grand Mosque">
+  <span class="date-number">2</span>
+</td>
+
+        <td>3</td>
+        <td>4</td>
+      </tr>
+      <!-- Week 2 -->
+      <tr>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+      </tr>
+      <!-- Week 3 -->
+      <tr>
+        <td>12</td>
+        <td class="event-day race" 
+    data-title="Bike Racing Competition" 
+    data-description="Watch local racers compete along the riverside highway. Food trucks and stalls available!"
+    data-location="Pekan Riverside Track">
+  <span class="date-number">13</span>
+</td>
+        <td>14</td>
+        <td>15</td>
+        <td>16</td>
+        <td>17</td>
+        <td>18</td>
+      </tr>
+      <!-- Week 4 -->
+      <tr>
+        <td>19</td>
+        <td>20</td>
+        <td>21</td>
+        <td>22</td>
+<td class="event-day car" 
+    data-title="Car Meet-up" 
+    data-description="See classic and custom cars from across Malaysia! Photography, food & car mods on display."
+    data-location="Pekan Stadium Parking">
+  <span class="date-number">23</span>
+</td>
+
+
+        <td>24</td>
+        <td>25</td>
+      </tr>
+      <!-- Week 5 -->
+      <tr>
+        <td>26</td>
+        <td>27</td>
+        <td>28</td>
+        <td>29</td>
+        <td>30</td>
+        <td>31</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Tooltip for Event Info -->
+<div id="event-tooltip" class="tooltip"></div>
+
+<script>
+  // Load navbar
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
+<script src="./js/calender.js"></script>
+<!-- Footer -->
+  <footer>
+    <div class="footer-full">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>About Pekan</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our History</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="#">Attractions</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Dining</a></li>
+            <li><a href="#">Shopping</a></li>
+          </ul>
+        </div>
+  
+        
+        <div class="footer-column">
+          <h4>Connect With Us</h4>
+          <ul>
+            <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<!-- chatbot placeholder -->
+<!-- Placeholder -->
+<div id="chatbot-placeholder"></div>
+ 
+  
+<!-- Load chatbot HTML + JS -->
+<script>
+  fetch('chatbot.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('chatbot-placeholder').innerHTML = html;
+
+      const script = document.createElement('script');
+      script.src = './js/chatbot.js';
+      script.onload = function () {
+        if (typeof initializeChatbot === 'function') {
+          initializeChatbot(); // ✅ This makes everything work
+        }
+      };
+      document.body.appendChild(script);
+    })
+    .catch(err => console.error('Chatbot failed to load:', err));
+</script>
+
+
+
+
+
+</body>
+</html>
