@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather Forecast</title>
+    <link rel="stylesheet" href="./css/chatbot.css">
+  <link rel="stylesheet" href="./css/weather.css" />
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<!-- Top Navbar -->
+<div id="navbar"></div>
+  <section id="weather-section">
+    <h2 class="section-title">🌤️ 7-Day Weather Forecast</h2>
+    
+    <!-- Fixed container with ID -->
+    <div id="weather-cards" class="weather-cards-container">
+      <!-- Cards will be dynamically inserted by weather.js -->
+    </div>
+  </section>
+<script>
+  // Load navbar
+  fetch("navbar.html")
+    .then(res => res.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
+  <!-- Weather JS file to load forecast dynamically -->
+  <script src="./js/weather.js"></script>
+   
+  <!-- Footer -->
+  <footer>
+    <div class="footer-full">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>About Pekan</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our History</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Discover</h4>
+          <ul>
+            <li><a href="#">Attractions</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Dining</a></li>
+            <li><a href="#">Shopping</a></li>
+          </ul>
+        </div>
+  
+        
+        <div class="footer-column">
+          <h4>Connect With Us</h4>
+          <ul>
+            <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<!-- Placeholder -->
+<div id="chatbot-placeholder"></div>
+
+<!-- Load chatbot HTML + JS -->
+<script>
+  fetch('chatbot.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('chatbot-placeholder').innerHTML = html;
+
+      const script = document.createElement('script');
+      script.src = './js/chatbot.js';
+      script.onload = function () {
+        if (typeof initializeChatbot === 'function') {
+          initializeChatbot(); 
+        }
+      };
+      document.body.appendChild(script);
+    })
+    .catch(err => console.error('Chatbot failed to load:', err));
+</script>
+
+
+
+
+
+
+</body>
+</html>
